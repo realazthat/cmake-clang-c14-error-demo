@@ -20,7 +20,7 @@ link_directories(
 
 
 ################################################################################
-add_library(demo
+add_executable(demo
     src/main.cpp
     )
 set_property(TARGET demo PROPERTY CXX_STANDARD 14)
