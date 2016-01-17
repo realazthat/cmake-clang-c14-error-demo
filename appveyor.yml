@@ -30,9 +30,6 @@ install:
 build_script:
 - ps: >-
     bash -c @'
-        set -exv
-        
         bash scripts/build.sh
-        
     '@
 
