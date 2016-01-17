@@ -10,3 +10,5 @@ cmake -G "$CMAKE_GENERATOR" .. -DCMAKE_VERBOSE_MAKEFILE=1
 cmake --build .
 
 cd ../
+
+exit 0
