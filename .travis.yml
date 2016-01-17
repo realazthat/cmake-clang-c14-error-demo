@@ -21,15 +21,17 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
-    - gcc-4.8
-    - g++-4.8
+    - gcc-5
+    - g++-5
     - clang
 
 install:
-    - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+    - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
 
 script:
     - cmake --version
+    - gcc --version
+    - clang --version
     - mkdir -p build && cd build
     - cmake -G "$CMAKE_GENERATOR" .. -DCMAKE_VERBOSE_MAKEFILE=1
     - cmake --build .
