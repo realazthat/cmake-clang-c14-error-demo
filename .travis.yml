@@ -1,0 +1,39 @@
+sudo: required
+dist: trusty
+
+language: cpp
+compiler:
+  - gcc
+  - clang
+env:
+
+  global:
+    - CMAKE_GENERATOR="Unix Makefiles"
+    - CMAKE_DEPS_BUILD_TYPE=Release
+    - GTEST_BUILD_TYPE=Release
+  matrix:
+    - CMAKE_BUILD_TYPE=Release SGFXAPI_BUILD_TYPE=Release
+    - CMAKE_BUILD_TYPE=Debug SGFXAPI_BUILD_TYPE=Debug
+
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
+    - clang
+
+install:
+    - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+
+script:
+    - cmake --version
+    - mkdir -p build && cd build
+    - cmake -G "$CMAKE_GENERATOR" ..
+    - cmake --build .
+    
+    - cd ../
+
+
