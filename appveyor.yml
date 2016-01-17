@@ -1,0 +1,48 @@
+version: 1.0.{build}
+environment:
+  matrix:
+  - CMAKE_BUILD_TYPE: Release
+    CMAKE_GENERATOR: MSYS Makefiles
+    CXX: clang++
+    CC: clang
+  matrix:
+  - CMAKE_BUILD_TYPE: Release
+    CMAKE_GENERATOR: MSYS Makefiles
+    CXX: g++
+    CC: gcc
+install:
+- cmd: >-
+    set "PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;C:\Windows\System32;C:\Windows;%PATH%"
+
+    set MSYSTEM=MINGW64
+
+    pacman --noconfirm -Sy
+
+    pacman --noconfirm --needed -S pacman-mirrors
+
+    pacman --noconfirm -Sy
+    
+
+    pacman --noconfirm --needed -S base-devel zip wget mingw-w64-x86_64-toolchain mercurial mingw64/mingw-w64-x86_64-gcc mingw64/mingw-w64-x86_64-cmake
+
+    pacman --noconfirm --needed -S mingw64/mingw-w64-x86_64-clang
+    
+    pacman --noconfirm --needed -S msys/subversion
+build_script:
+- ps: >-
+    bash -c @'
+        set -exv
+        
+        PROJECT_PATH="$PWD"
+        
+        cmake --version
+        gcc --version
+        clang --version
+        mkdir -p build && cd build
+        cmake -G "$CMAKE_GENERATOR" .. -DCMAKE_VERBOSE_MAKEFILE=1
+        cmake --build .
+        
+        cd ../
+        
+    '@
+
