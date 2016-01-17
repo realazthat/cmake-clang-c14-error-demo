@@ -3,13 +3,12 @@ environment:
   matrix:
   - CMAKE_BUILD_TYPE: Release
     CMAKE_GENERATOR: MSYS Makefiles
-    CXX: clang++
-    CC: clang
-  matrix:
-  - CMAKE_BUILD_TYPE: Release
-    CMAKE_GENERATOR: MSYS Makefiles
     CXX: g++
     CC: gcc
+  - CMAKE_BUILD_TYPE: Release
+    CMAKE_GENERATOR: MSYS Makefiles
+    CXX: clang++
+    CC: clang
 install:
 - cmd: >-
     set "PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;C:\Windows\System32;C:\Windows;%PATH%"
